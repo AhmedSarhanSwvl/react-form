@@ -1,25 +1,105 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [phone, setPhone] = useState('');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const [city, setCity] = useState('');
+	const [zipCode, setZipCode] = useState('');
+
+	const submitForm = (e) => {
+		e.preventDefault();
+
+		const data = {
+			name,
+			email,
+			phone,
+			password,
+			confirmPassword,
+			city,
+			zipCode,
+		};
+		console.log('data', data);
+	};
+	return (
+		<div className="App" onSubmit={submitForm}>
+			<form>
+				<div className="form-group">
+					<label htmlFor="username">Username</label>
+					<input
+						type="text"
+						id="username"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
+				</div>
+				<div className="two-col_grid">
+					<div className="form-group">
+						<label htmlFor="email">Email</label>
+						<input
+							type="email"
+							id="email"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="phone">Phone</label>
+						<input
+							type="tel"
+							id="phone"
+							value={phone}
+							onChange={(e) => setPhone(e.target.value)}
+						/>
+					</div>
+				</div>
+				<div className="two-col_grid">
+					<div className="form-group">
+						<label htmlFor="password">Password</label>
+						<input
+							type="password"
+							id="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="confirmPassword">Confirm Password</label>
+						<input
+							type="password"
+							id="confirmPassword"
+							value={confirmPassword}
+							onChange={(e) => setConfirmPassword(e.target.value)}
+						/>
+					</div>
+				</div>
+				<div className="two-col_grid">
+					<div className="form-group">
+						<label htmlFor="city">City</label>
+						<input
+							type="text"
+							id="city"
+							value={city}
+							onChange={(e) => setCity(e.target.value)}
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="zipCode">Zip Code</label>
+						<input
+							type="text"
+							id="zipCode"
+							value={zipCode}
+							onChange={(e) => setZipCode(e.target.value)}
+						/>
+					</div>
+				</div>
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+	);
 }
 
 export default App;
