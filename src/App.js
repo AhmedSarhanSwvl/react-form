@@ -1,15 +1,38 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 import './App.css';
 
+const initialValues = {
+	name: '',
+	email: '',
+	phone: '',
+	password: '',
+	confirmPassword: '',
+	city: '',
+	zipCode: '',
+};
+const reducerFunction = (prevState, newState) => {
+	return { ...prevState, ...newState };
+};
 function App() {
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [phone, setPhone] = useState('');
-	const [password, setPassword] = useState('');
-	const [confirmPassword, setConfirmPassword] = useState('');
-	const [city, setCity] = useState('');
-	const [zipCode, setZipCode] = useState('');
+	const [formValues, setFormValues] = useReducer(
+		reducerFunction,
+		initialValues
+	);
 
+	const onChangeHandler = (event) => {
+		const { name, value } = event.target;
+		setFormValues({ [name]: value });
+	};
+
+	const {
+		name,
+		email,
+		phone,
+		password,
+		confirmPassword,
+		city,
+		zipCode,
+	} = formValues;
 	const submitForm = (e) => {
 		e.preventDefault();
 
@@ -28,12 +51,12 @@ function App() {
 		<div className="App" onSubmit={submitForm}>
 			<form>
 				<div className="form-group">
-					<label htmlFor="username">Username</label>
+					<label htmlFor="name">Username</label>
 					<input
 						type="text"
-						name="username"
+						name="name"
 						value={name}
-						onChange={(e) => setName(e.target.value)}
+						onChange={onChangeHandler}
 					/>
 				</div>
 				<div className="two-col_grid">
@@ -43,7 +66,7 @@ function App() {
 							type="email"
 							name="email"
 							value={email}
-							onChange={(e) => setEmail(e.target.value)}
+							onChange={onChangeHandler}
 						/>
 					</div>
 					<div className="form-group">
@@ -52,7 +75,7 @@ function App() {
 							type="tel"
 							name="phone"
 							value={phone}
-							onChange={(e) => setPhone(e.target.value)}
+							onChange={onChangeHandler}
 						/>
 					</div>
 				</div>
@@ -63,7 +86,7 @@ function App() {
 							type="password"
 							name="password"
 							value={password}
-							onChange={(e) => setPassword(e.target.value)}
+							onChange={onChangeHandler}
 						/>
 					</div>
 					<div className="form-group">
@@ -72,7 +95,7 @@ function App() {
 							type="password"
 							name="confirmPassword"
 							value={confirmPassword}
-							onChange={(e) => setConfirmPassword(e.target.value)}
+							onChange={onChangeHandler}
 						/>
 					</div>
 				</div>
@@ -83,7 +106,7 @@ function App() {
 							type="text"
 							name="city"
 							value={city}
-							onChange={(e) => setCity(e.target.value)}
+							onChange={onChangeHandler}
 						/>
 					</div>
 					<div className="form-group">
@@ -92,7 +115,7 @@ function App() {
 							type="text"
 							name="zipCode"
 							value={zipCode}
-							onChange={(e) => setZipCode(e.target.value)}
+							onChange={onChangeHandler}
 						/>
 					</div>
 				</div>
